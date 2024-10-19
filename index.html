@@ -33,45 +33,45 @@
 		const reset_button = document.getElementById("reset-button");
 
 		function submitMessage() {
-		  const userInput = user_input.value;
-		  user_input.value = "";
+			const userInput = user_input.value;
+			user_input.value = "";
 
-		  fetch("http://127.0.0.1:5000/api/data", {
-		    method: "POST",
-		    headers: {
-		      "Content-Type": "application/json"
-		    },
-		    body: JSON.stringify({ message: userInput })
-		  })
-		  .then(response => response.json())
-		  .then(data => {
-		    const userParagraph = document.createElement("p");
-		    userParagraph.textContent = "You: " + userInput;
-		    userParagraph.style.color = "blue";
-		    chat_window.appendChild(userParagraph);
+			fetch("http://127.0.0.1:5000/api/data", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({ message: userInput })
+			})
+			.then(response => response.json())
+			.then(data => {
+				const userParagraph = document.createElement("p");
+				userParagraph.textContent = "You: " + userInput;
+				userParagraph.style.color = "blue";
+				chat_window.appendChild(userParagraph);
 
-		    const responseParagraph = document.createElement("p");
-		    responseParagraph.textContent = "Bot: " + data.response;
-		    responseParagraph.style.color = "green";
-		    chat_window.appendChild(responseParagraph);
-		  })
-		  .catch(error => {
-		    console.error(error);
-		  });
+				const responseParagraph = document.createElement("p");
+				responseParagraph.textContent = "Bot: " + data.response;
+				responseParagraph.style.color = "green";
+				chat_window.appendChild(responseParagraph);
+			})
+			.catch(error => {
+				console.error(error);
+			});
 		}
 
 		function resetChat() {
-		  chat_window.innerHTML = '';
-		  user_input.value = '';
+			chat_window.innerHTML = '';
+			user_input.value = '';
 		}
 
 		send_button.addEventListener("click", submitMessage);
 		reset_button.addEventListener("click", resetChat);
 
 		user_input.addEventListener('keypress', function(e) {
-		    if (e.key === 'Enter') {
-		        submitMessage();
-		    }
+			if (e.key === 'Enter') {
+				submitMessage();
+			}
 		});
 	</script>
 </body>
