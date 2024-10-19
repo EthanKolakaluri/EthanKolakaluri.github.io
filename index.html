@@ -36,19 +36,15 @@
 	<div class="chat-window" id="chat-window"></div>
 
 	<script>
-	// Get user input and chat window elements
 		const user_input = document.getElementById("user-input");
 		const chat_window = document.getElementById("chat-window");
-		
-		// Function to submit user message
+		const send_button = document.getElementById("send-button");
+		const reset_button = document.getElementById("reset-button");
+
 		function submitMessage() {
-		  // Get user input
 		  const userInput = user_input.value;
-		
-		  // Clear input field
 		  user_input.value = "";
-		
-		  // Send POST request to Flask API
+
 		  fetch("http://127.0.0.1:5000/api/data", {
 		    method: "POST",
 		    headers: {
@@ -58,13 +54,11 @@
 		  })
 		  .then(response => response.json())
 		  .then(data => {
-		    // Display user's message
 		    const userParagraph = document.createElement("p");
 		    userParagraph.textContent = "You: " + userInput;
 		    userParagraph.style.color = "blue";
 		    chat_window.appendChild(userParagraph);
-		
-		    // Display bot's response
+
 		    const responseParagraph = document.createElement("p");
 		    responseParagraph.textContent = "Bot: " + data.response;
 		    responseParagraph.style.color = "green";
@@ -74,9 +68,20 @@
 		    console.error(error);
 		  });
 		}
-		
-		// Add event listener to submit button
-		document.getElementById("submit-button").addEventListener("click", submitMessage);
+
+		function resetChat() {
+		  chat_window.innerHTML = '';
+		  user_input.value = '';
+		}
+
+		send_button.addEventListener("click", submitMessage);
+		reset_button.addEventListener("click", resetChat);
+
+		user_input.addEventListener('keypress', function(e) {
+		    if (e.key === 'Enter') {
+		        submitMessage();
+		    }
+		});
 	</script>
 </body>
 </html>
