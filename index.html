@@ -1,11 +1,3 @@
-
-//this is the html file that will be used to display the chatbot
-//the user will be able to type in a message and the chatbot will respond
-//the chatbot will be a python script that will be called from this html file
-//the python script will be called using a POST request
-//the response from the python script will be displayed in a new window
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
-		/* Add some styles for the chat window */
 		.chat-window {
 			width: 400px;
 			height: 400px;
@@ -30,9 +21,9 @@
 	<h1>Chatbot</h1>
 	<p>Type your message below:</p>
 	<input type="text" id="user-input">
-	<button onclick="submitMessage()">Send</button>
+	<button id="send-button">Send</button>
+	<button id="reset-button">Reset</button>
 
-	<!-- Create a div to display the chat messages -->
 	<div class="chat-window" id="chat-window"></div>
 
 	<script>
