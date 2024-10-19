@@ -36,35 +36,47 @@
 	<div class="chat-window" id="chat-window"></div>
 
 	<script>
+	// Get user input and chat window elements
+		const user_input = document.getElementById("user-input");
+		const chat_window = document.getElementById("chat-window");
+		
+		// Function to submit user message
 		function submitMessage() {
-			// Get the user input
-			var userInput = document.getElementById("user-input").value;
-
-			// Clear the input field
-			document.getElementById("user-input").value = "";
-
-			// Send a POST request to the Python script to get the response
-			fetch("/chatbot", {
-				method: "POST",
-				body: JSON.stringify({"message": userInput})
-			})
-			.then(response => response.json())
-			.then(data => {
-				// Create a new window to display the response
-				var responseWindow = window.open("", "Response", "width=400,height=400");
-
-				// Display the response in the new window
-				responseWindow.document.write("<h1>Response</h1>");
-				responseWindow.document.write("<div class='chat-window'>");
-				for (var i = 0; i < data.length; i++) {
-					responseWindow.document.write("<p>" + data[i] + "</p>");
-				}
-				responseWindow.document.write("</div>");
-			})
-			.catch(error => {
-				console.error(error);
-			});
+		  // Get user input
+		  const userInput = user_input.value;
+		
+		  // Clear input field
+		  user_input.value = "";
+		
+		  // Send POST request to Flask API
+		  fetch("/api/data", {
+		    method: "POST",
+		    headers: {
+		      "Content-Type": "application/json"
+		    },
+		    body: JSON.stringify({ message: userInput })
+		  })
+		  .then(response => response.json())
+		  .then(data => {
+		    // Display user's message
+		    const userParagraph = document.createElement("p");
+		    userParagraph.textContent = "You: " + userInput;
+		    userParagraph.style.color = "blue";
+		    chat_window.appendChild(userParagraph);
+		
+		    // Display bot's response
+		    const responseParagraph = document.createElement("p");
+		    responseParagraph.textContent = "Bot: " + data.response;
+		    responseParagraph.style.color = "green";
+		    chat_window.appendChild(responseParagraph);
+		  })
+		  .catch(error => {
+		    console.error(error);
+		  });
 		}
+		
+		// Add event listener to submit button
+		document.getElementById("submit-button").addEventListener("click", submitMessage);
 	</script>
 </body>
 </html>
