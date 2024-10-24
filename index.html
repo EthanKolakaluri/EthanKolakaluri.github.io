@@ -9,9 +9,14 @@
 			font-family: Arial, sans-serif;
 			background-color: #ff0000; /* Red background */
 		}
+		.chat-container {
+			width: 50vw; /* Half screen width */
+			height: 80vh; /* 80% screen height */
+			margin: 10vh auto; /* Center vertically */
+		}
 		.chat-window {
-			width: 400px;
-			height: 400px;
+			width: 100%;
+			height: 80%;
 			border: 1px solid black;
 			overflow-y: scroll;
 			padding: 10px;
@@ -20,6 +25,11 @@
 		.chat-window p {
 			margin: 5px;
 		}
+		.input-container {
+			width: 100%;
+			padding: 10px;
+			background-color: #ffffff; /* White input container background */
+		}
 		#user-input {
 			padding: 10px;
 			border: 2px solid #8b0a0a; /* Dark red border */
@@ -27,13 +37,21 @@
 			transition: border-color 0.2s ease-in-out;
 			background-color: #660000; /* Dark red background */
 			color: #ffffff; /* White text */
+			width: 80%; /* Input box width */
 		}
 		#user-input:focus {
 			border-color: #f00; /* Red glow */
 			box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red shadow */
 		}
-		h1, p, button {
+		.buttons {
+			margin-top: 10px;
+		}
+		.buttons button {
+			margin-right: 10px;
+		}
+		h1 {
 			color: #ffffff; /* White text */
+			text-align: center;
 		}
 	</style>
 </head>
