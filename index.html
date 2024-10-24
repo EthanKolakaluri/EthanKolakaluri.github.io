@@ -88,12 +88,12 @@
 			.then(data => {
 				const userParagraph = document.createElement("p");
 				userParagraph.textContent = "You: " + userInput;
-				userParagraph.style.color = "blue";
+				userParagraph.style.color = "black";
 				chat_window.appendChild(userParagraph);
 
 				const responseParagraph = document.createElement("p");
 				responseParagraph.textContent = "Bot: " + data.response;
-				responseParagraph.style.color = "green";
+				responseParagraph.style.color = "red";
 				chat_window.appendChild(responseParagraph);
 			})
 			.catch(error => {
